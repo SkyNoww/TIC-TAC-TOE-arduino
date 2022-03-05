@@ -1,0 +1,126 @@
+int x = 0;
+int y = 0;
+
+String inputText = String("");
+
+char valeur = 0;
+char plateau[3][3] = 
+{
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+};
+
+
+void setup()
+{
+
+     
+     Serial.begin(9600); // On etablie une nouvelle ligne de communication 
+         Serial.println("La partie commence !");
+                //
+///// Affichage du tableau /////
+         Serial.print(plateau[0][0]);
+             Serial.print(plateau[0][1]);
+                 Serial.println(plateau[0][2]);
+                     Serial.print(plateau[1][0]);
+                         Serial.print(plateau[1][1]);
+                             Serial.println(plateau[1][2]);
+                                 Serial.print(plateau[2][0]);
+                                     Serial.print(plateau[2][1]);
+                                         Serial.println(plateau[2][2]);
+                                             Serial.println();
+                                                 Serial.println(); 
+}
+
+void jouer(int x, int y, char valeur)
+{
+  
+    char input = Serial.read();
+     if (plateau[x][y] == 'x')
+     {
+         Serial.println("ERREUR vous ne pouvez pas jouer ici");
+     }
+
+          if (plateau[x][y] == 'o')
+     {
+         Serial.println("ERREUR vous ne pouvez pas jouer ici");
+     }
+  
+     else if (plateau[x][y] = 'x')
+     {
+        plateau[x][y] = valeur;
+     }
+
+     else if (plateau[x][y] = 'o')
+     {
+        plateau[x][y] = valeur;
+     }
+}
+
+void loop()
+{
+
+  if(Serial.available() > 0) // envoyer des donnees uniquement quand on en recoit 
+  {
+    char input = Serial.read();
+      
+      if (input != '\n' && input != '\r')
+      {
+        inputText += String(input);
+      }
+      else
+      {
+        Serial.print("Un joueur a jouer: ");
+           Serial.println(inputText);
+
+            int x = inputText.substring(0, 1).toInt();
+              int y = inputText.substring(2, 3).toInt();
+                char valeur = inputText.substring(4, 5).charAt(0);
+                    
+
+            ///// Affichage du tableau /////
+        
+       jouer(x, y, valeur);
+         Serial.print(plateau[0][0]);
+             Serial.print(plateau[0][1]);
+                 Serial.println(plateau[0][2]);
+                     Serial.print(plateau[1][0]);
+                         Serial.print(plateau[1][1]);
+                             Serial.println(plateau[1][2]);
+                                 Serial.print(plateau[2][0]);
+                                     Serial.print(plateau[2][1]);
+                                         Serial.println(plateau[2][2]);
+                                             Serial.println();
+                                                 Serial.println();
+                                                      inputText = "";
+      }
+     
+  } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
